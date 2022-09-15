@@ -21,7 +21,7 @@
 
     <form asp-controller="Categoria" asp-action="Inserir" method="post">
         <div class="form-group">
-            <label>Nome</label>
+            <label>Categoria</label>
             <input type="text" asp-for="Nome" name="Nome" class="form-control">
             <small class="text-danger">@Html.ValidationMessageFor(p => p.Nome)</small>
         </div>
