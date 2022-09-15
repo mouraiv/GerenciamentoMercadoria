@@ -1,17 +1,16 @@
 using GerenciamentoMercadoria.Context;
-using GerenciamentoMercadoria.Models;
 using GerenciamentoMercadoria.Repository;
 using GerenciamentoMercadoria.Repository.Interface;
 using Microsoft.EntityFrameworkCore;
+using System.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews(); 
+builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<AppDbContext>
-    (options => options.UseSqlServer
-    ("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=gerenciarMercadoriaDb;Integrated Security=True;Connect Timeout=30;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"));
+    (options => options.UseSqlServer(builder.Configuration.GetConnectionString("AppDbContext")));
 builder.Services.AddScoped<ICategoriaRepository, CategoriaRepository>();
 builder.Services.AddScoped<IFabricanteRepository, FabricanteRepository>();
 
