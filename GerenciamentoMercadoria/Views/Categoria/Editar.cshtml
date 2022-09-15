@@ -1,0 +1,24 @@
+﻿@model Categoria
+
+<div class="text-left" style="width:400px;">
+
+    @if (TempData["Falha"] != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            <button type="button" class="close-alert text-danger" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Error! </strong>@TempData["Falha"]
+        </div>
+    }
+
+    <h4>Editar categorias</h4>
+
+    <form asp-controller="Categoria" asp-action="Editar" method="post">
+      <input type="hidden" asp-for="Id">
+        <div class="form-group">
+            <label>Nome</label>
+            <input type="text" asp-for="Nome" class="form-control">
+        </div>
+        <a role="button" asp-controller="Categoria" asp-action="Index" class="btn btn-primary mt-2">Voltar</a>
+        <button type="submit" class="btn btn-success mt-2">Editar</button>
+    </form>
+</div>

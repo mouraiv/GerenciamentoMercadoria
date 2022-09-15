@@ -1,0 +1,56 @@
+﻿@model List<Categoria>
+@{
+    ViewData["Title"] = "Categoria";
+}
+
+<div class="text-left">
+
+    @if (TempData["Sucesso"] != null)
+    {
+        <div class="alert alert-success" role="alert">
+            <button type="button" class="close-alert text-success" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Sucesso! </strong>@TempData["Sucesso"]
+        </div>
+    }
+    @if (TempData["Falha"] != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            <button type="button" class="close-alert text-danger" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Error! </strong>@TempData["Falha"]
+        </div>
+    }
+
+    <h4>Lista de categorias</h4>
+    <div class="pt-4">
+    <a role="button" class="btn btn-success" asp-controller="Categoria" asp-action="Inserir">Adicionar</a>
+    </div>
+    <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Nome</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+            @if (Model != null && Model.Any())
+            {
+                foreach (Categoria categoria in Model)
+                {
+                    <tr>
+                      <th scope="row">@categoria.Id</th>
+                      <td>@categoria.Nome</td>
+                      <td>
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                           <a role="button" asp-route-id="@categoria.Id" asp-controller="Categoria" asp-action="Editar" class="btn btn-primary">Editar</a>
+                           <a role="button" asp-route-id="@categoria.Id" asp-controller="Categoria" asp-action="Confirmacao" class="btn btn-danger">Excluir</a>
+                        </div>
+                      </td>
+                    </tr>
+                }
+
+            }
+  </tbody>
+</table>
+
+</div>

@@ -1,0 +1,31 @@
+﻿@model Categoria
+
+<div class="text-left" style="width:400px;">
+
+    @if (TempData["Sucesso"] != null)
+    {
+        <div class="alert alert-success" role="alert">
+            <button type="button" class="close-alert text-success" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Sucesso! </strong>@TempData["Sucesso"]
+        </div>
+    }
+    @if (TempData["Falha"] != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            <button type="button" class="close-alert text-danger" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Error! </strong>@TempData["Falha"]
+        </div>
+    }
+
+    <h4>Cadastrar categorias</h4>
+
+    <form asp-controller="Categoria" asp-action="Inserir" method="post">
+        <div class="form-group">
+            <label>Nome</label>
+            <input type="text" asp-for="Nome" name="Nome" class="form-control">
+            <small class="text-danger">@Html.ValidationMessageFor(p => p.Nome)</small>
+        </div>
+        <a role="button" asp-controller="Categoria" asp-action="Index" class="btn btn-primary mt-2">Voltar</a>
+        <button type="submit" class="btn btn-success mt-2">Inserir</button>
+    </form>
+</div>

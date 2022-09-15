@@ -1,0 +1,13 @@
+﻿@model Fabricante
+@{
+    ViewData["Title"] = "Confirmação";
+}
+
+<div class="text-left" style="width:500px;">
+    <strong>Deseja exluir a fabricante <br />( @Model.Nome ) ?</strong>
+    <div class="group-item mt-4">
+        <a role="button" asp-controller="Fabricante" asp-action="Index" class="btn btn-primary mt-2">Cancelar</a>
+        <a role="button" asp-controller="Fabricante" asp-action="Apagar" asp-route-id="@Model.Id" class="btn btn-danger mt-2">Excluir</a>
+    </div>
+</div>
+

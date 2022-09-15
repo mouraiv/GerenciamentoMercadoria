@@ -1,0 +1,62 @@
+﻿@model List<Mercadoria>
+@{
+    ViewData["Title"] = "Mercadoria";
+}
+
+<div class="text-left">
+
+    @if (TempData["Sucesso"] != null)
+    {
+        <div class="alert alert-success" role="alert">
+            <button type="button" class="close-alert text-success" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Sucesso! </strong>@TempData["Sucesso"]
+        </div>
+    }
+    @if (TempData["Falha"] != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            <button type="button" class="close-alert text-danger" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Error! </strong>@TempData["Falha"]
+        </div>
+    }
+
+    <h4>Lista de Mercadorias</h4>
+    <div class="pt-4">
+        <a role="button" class="btn btn-success" asp-controller="Mercadoria" asp-action="Inserir">Adicionar</a>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Categoria</th>
+                <th scope="col">Fabricante</th>
+                <th scope="col">Produto</th>
+                <th scope="col">Descrição</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                foreach (Mercadoria Mercadoria in Model)
+                {
+                    <tr>
+                        <th scope="row">@Mercadoria.Id</th>
+                        <td>@Mercadoria.categoria.Nome</td>
+                        <td>@Mercadoria.fabricante.Nome</td>
+                        <td>@Mercadoria.Nome</td>
+                        <td>@Mercadoria.Descricao</td>
+                        <td>
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                                <a role="button" asp-route-id="@Mercadoria.Id" asp-controller="Mercadoria" asp-action="Editar" class="btn btn-primary">Editar</a>
+                                <a role="button" asp-route-id="@Mercadoria.Id" asp-controller="Mercadoria" asp-action="Confirmacao" class="btn btn-danger">Excluir</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+
+            }
+        </tbody>
+    </table>
+
+</div>
