@@ -1,6 +1,6 @@
 # SISTEMA WEB DE GERENCIAMENTO DE MERCADORIA
 
-Este sistema web tem como objetivo cadastrados os tipos de mercadorias e as entradas e saídas das mesmas.
+Este sistema web tem como objetivo cadastrar os tipos de mercadorias e as entradas e saídas das mesmas.
 
 # Recursos Utilizados: :computer:
 
