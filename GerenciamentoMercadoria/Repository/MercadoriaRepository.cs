@@ -26,7 +26,10 @@ namespace GerenciamentoMercadoria.Repository
 
             if (db == null) throw new Exception("Houve um erro na atualização");
 
+            db.FabricanteId = mercadoria.FabricanteId;
             db.Nome = mercadoria.Nome;
+            db.CategoriaId = mercadoria.CategoriaId;
+            db.Descricao = mercadoria.Descricao;
 
             _context.Mercadorias.Update(db);
             _context.SaveChanges();

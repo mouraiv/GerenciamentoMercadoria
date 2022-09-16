@@ -1,5 +1,12 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model Mercadoria
 @{
+    ViewData["Title"] = "Confirmação";
 }
+
+<div class="text-left" style="width:500px;">
+    <strong>Deseja exluir a Mercadoria <br />( @Model.Nome ) ?</strong>
+    <div class="group-item mt-4">
+        <a role="button" asp-controller="Mercadoria" asp-action="Index" class="btn btn-primary mt-2">Cancelar</a>
+        <a role="button" asp-controller="Mercadoria" asp-action="Apagar" asp-route-id="@Model.Id" class="btn btn-danger mt-2">Excluir</a>
+    </div>
+</div>

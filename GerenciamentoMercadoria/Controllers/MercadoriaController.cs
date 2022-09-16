@@ -30,6 +30,13 @@ namespace GerenciamentoMercadoria.Controllers
         public IActionResult Editar(int id)
         {
             Mercadoria mercadoria = _mercadoriaRepository.CarregarId(id);
+
+            ViewData["CategoriaId"] =
+                   new SelectList(_mercadoriaRepository.Categorias(), "Id", "Nome");
+
+            ViewData["FabricanteId"] =
+                new SelectList(_mercadoriaRepository.Fabricantes(), "Id", "Nome");
+
             return View(mercadoria);
         }
         public IActionResult Confirmacao(int id)
@@ -71,11 +78,6 @@ namespace GerenciamentoMercadoria.Controllers
                     }
 
                 }
-                ViewData["CategoriaId"] =
-                    new SelectList(_mercadoriaRepository.Categorias(), "Id", "Nome");
-         
-                ViewData["FabricanteId"] =
-                    new SelectList(_mercadoriaRepository.Fabricantes(), "Id", "Nome");
                 return View(mercadoria);
             }
             catch (Exception error)
