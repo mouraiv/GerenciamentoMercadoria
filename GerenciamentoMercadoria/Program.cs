@@ -15,6 +15,7 @@ builder.Services.AddDbContext<AppDbContext>
     (options => options.UseSqlServer(builder.Configuration.GetConnectionString("AppDbContext")));
 builder.Services.AddScoped<ICategoriaRepository, CategoriaRepository>();
 builder.Services.AddScoped<IEntradaRepository, EntradaRepository>();
+builder.Services.AddScoped<ISaidaRepository, SaidaRepository>();
 builder.Services.AddScoped<IFabricanteRepository, FabricanteRepository>();
 builder.Services.AddScoped<IMercadoriaRepository, MercadoriaRepository>();
 
