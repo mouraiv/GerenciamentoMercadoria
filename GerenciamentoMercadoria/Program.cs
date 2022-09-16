@@ -1,3 +1,5 @@
+using GerenciamentoEntrada.Repository.Interface;
+using GerenciamentoEntrada.Repository;
 using GerenciamentoMercadoria.Context;
 using GerenciamentoMercadoria.Repository;
 using GerenciamentoMercadoria.Repository.Interface;
@@ -12,6 +14,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<AppDbContext>
     (options => options.UseSqlServer(builder.Configuration.GetConnectionString("AppDbContext")));
 builder.Services.AddScoped<ICategoriaRepository, CategoriaRepository>();
+builder.Services.AddScoped<IEntradaRepository, EntradaRepository>();
 builder.Services.AddScoped<IFabricanteRepository, FabricanteRepository>();
 builder.Services.AddScoped<IMercadoriaRepository, MercadoriaRepository>();
 

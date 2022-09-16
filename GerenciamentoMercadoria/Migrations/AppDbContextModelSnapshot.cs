@@ -37,7 +37,7 @@ namespace GerenciamentoMercadoria.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categorias");
+                    b.ToTable("Categorias", (string)null);
                 });
 
             modelBuilder.Entity("GerenciamentoMercadoria.Models.Entrada", b =>
@@ -76,7 +76,7 @@ namespace GerenciamentoMercadoria.Migrations
 
                     b.HasIndex("MercadoriaId");
 
-                    b.ToTable("Entradas");
+                    b.ToTable("Entradas", (string)null);
                 });
 
             modelBuilder.Entity("GerenciamentoMercadoria.Models.Fabricante", b =>
@@ -94,7 +94,7 @@ namespace GerenciamentoMercadoria.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Fabricantes");
+                    b.ToTable("Fabricantes", (string)null);
                 });
 
             modelBuilder.Entity("GerenciamentoMercadoria.Models.Mercadoria", b =>
@@ -127,7 +127,7 @@ namespace GerenciamentoMercadoria.Migrations
 
                     b.HasIndex("FabricanteId");
 
-                    b.ToTable("Mercadorias");
+                    b.ToTable("Mercadorias", (string)null);
                 });
 
             modelBuilder.Entity("GerenciamentoMercadoria.Models.Saida", b =>
@@ -166,7 +166,7 @@ namespace GerenciamentoMercadoria.Migrations
 
                     b.HasIndex("MercadoriaId");
 
-                    b.ToTable("Saidas");
+                    b.ToTable("Saidas", (string)null);
                 });
 
             modelBuilder.Entity("GerenciamentoMercadoria.Models.Entrada", b =>

@@ -1,0 +1,67 @@
+﻿@model Entrada
+
+<div class="text-left" style="width:400px;">
+
+    @if (TempData["Sucesso"] != null)
+    {
+        <div class="alert alert-success" role="alert">
+            <button type="button" class="close-alert text-success" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Sucesso! </strong>@TempData["Sucesso"]
+        </div>
+    }
+    @if (TempData["Falha"] != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            <button type="button" class="close-alert text-danger" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Error! </strong>@TempData["Falha"]
+        </div>
+    }
+
+    <h4>Cadastrar Entradas</h4>
+
+    <form asp-controller="Entrada" asp-action="Inserir" method="post">
+        <div class="text-right">
+        <strong mt-4 mb-4 class="text-success">@DateTime.Now</strong>
+        </div>
+        <div class="form-group mb-2">
+            <label>Produto</label>
+            <select asp-for="MercadoriaId" name="MercadoriaId" asp-items="ViewBag.MercadoriaId" class="form-select">
+                <option selected>Selecionar</option>
+            </select>
+            <small class="text-danger">@Html.ValidationMessageFor(p => p.MercadoriaId)</small>
+        </div>
+        <div class="form-group mb-2">
+            <label>Quantidade</label>
+            <input type="Quantidade" asp-for="Quantidade" name="Quantidade" class="form-control">
+            <small class="text-danger">@Html.ValidationMessageFor(p => p.Quantidade)</small>
+        </div>
+        <div class="form-group mb-2">
+            <label>Rua</label>
+            <input type="text" asp-for="Rua" name="Rua" class="form-control">
+            <small class="text-danger">@Html.ValidationMessageFor(p => p.Rua)</small>
+        </div>
+        <div class="form-group mb-2">
+            <label>Numero</label>
+            <input type="number" asp-for="Numero" name="Numero" class="form-control">
+            <small class="text-danger">@Html.ValidationMessageFor(p => p.Numero)</small>
+        </div>
+        <div class="form-group mb-2">
+            <label>Bairro</label>
+            <input type="text" asp-for="Bairro" name="Bairro" class="form-control">
+            <small class="text-danger">@Html.ValidationMessageFor(p => p.Bairro)</small>
+        </div>
+        <div class="form-group mb-4">
+            <label>Estado</label>
+            <select asp-for="Estado" name="Estado" class="form-select">
+                <option selected>Selecionar</option>
+                <option value="RJ">Rio de Janeiro</option>
+                <option value="SP">São Paulo</option>
+            </select>
+            <small class="text-danger">@Html.ValidationMessageFor(p => p.Estado)</small>
+        </div>
+        <a role="button" asp-controller="Entrada" asp-action="Index" class="btn btn-primary mt-2">Voltar</a>
+        <button type="submit" class="btn btn-success mt-2">Inserir</button>
+    </form>
+</div>
+
+

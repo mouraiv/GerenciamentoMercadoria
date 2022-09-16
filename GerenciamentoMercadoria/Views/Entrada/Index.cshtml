@@ -1,6 +1,6 @@
-﻿@model List<Mercadoria>
+﻿@model List<Entrada>
 @{
-    ViewData["Title"] = "Mercadoria";
+    ViewData["Title"] = "Entrada";
 }
 
 <div class="text-left">
@@ -20,49 +20,46 @@
         </div>
     }
 
-    <h4>Lista de Mercadorias</h4>
+    <h4>Lista de Entradas</h4>
     <div class="pt-4">
-        <a role="button" class="btn btn-success" asp-controller="Mercadoria" asp-action="Inserir">Adicionar</a>
-    </div>
-    <div class="pt-4">
-        <a role="button" class="btn btn-success" asp-controller="Entrada" asp-action="Inserir">Entrada de Mercadoria</a>
-    </div>
-    <div class="pt-4">
-        <a role="button" class="btn btn-danger" asp-controller="" asp-action="">Saida de Mercadoria</a>
+        <a role="button" class="btn btn-success" asp-controller="Entrada" asp-action="Inserir">Adicionar</a>
     </div>
     <table class="table">
         <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Fabricante</th>
+                <th scope="col">Tipo</th>
+                <th scope="col">Data / Hora</th>
                 <th scope="col">Produto</th>
-                <th scope="col">Categoria</th>
-                <th scope="col">Descrição</th>
+                <th scope="col">Quantidade</th>
+                <th scope="col">Estado(UF)</th>
                 <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
             @if (Model != null && Model.Any())
             {
-                foreach (Mercadoria Mercadoria in Model)
+                foreach (Entrada Entrada in Model)
                 {
                     <tr>
-                        <th scope="row">@Mercadoria.Id</th>
-                        <td>@Mercadoria.fabricante.Nome</td>
-                        <td>@Mercadoria.Nome</td>
-                        <td>@Mercadoria.categoria.Nome</td>
-                        <td>@Mercadoria.Descricao</td>
+                        <th scope="row">@Entrada.Id</th>
+                        <td>Entrada</td>
+                        <td>@Entrada.DataHora</td>
+                        <td>@Entrada.mercadoria.Nome</td>
+                        <td>@Entrada.Quantidade</td>
+                        <td>@Entrada.Estado</td>
                         <td>
                             <div class="btn-group" role="group" aria-label="Basic example">
-                                <a role="button" asp-route-id="@Mercadoria.Id" asp-controller="Mercadoria" asp-action="Editar" class="btn btn-primary">Editar</a>
-                                <a role="button" asp-route-id="@Mercadoria.Id" asp-controller="Mercadoria" asp-action="Confirmacao" class="btn btn-danger">Excluir</a>
+                                <a role="button" asp-route-id="@Entrada.Id" asp-controller="Entrada" asp-action="Editar" class="btn btn-primary">Editar</a>
+                                <a role="button" asp-route-id="@Entrada.Id" asp-controller="Entrada" asp-action="Confirmacao" class="btn btn-danger">Excluir</a>
                             </div>
                         </td>
                     </tr>
                 }
-
             }
         </tbody>
     </table>
 
 </div>
+
+
