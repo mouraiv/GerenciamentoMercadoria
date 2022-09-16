@@ -18,6 +18,7 @@ builder.Services.AddScoped<IEntradaRepository, EntradaRepository>();
 builder.Services.AddScoped<ISaidaRepository, SaidaRepository>();
 builder.Services.AddScoped<IFabricanteRepository, FabricanteRepository>();
 builder.Services.AddScoped<IMercadoriaRepository, MercadoriaRepository>();
+builder.Services.AddScoped<IHomeRepository, HomeRepository>();
 
 var app = builder.Build();
 

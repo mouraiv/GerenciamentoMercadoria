@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Drawing;
 
 namespace GerenciamentoMercadoria.Controllers
 {
@@ -6,6 +7,7 @@ namespace GerenciamentoMercadoria.Controllers
     {
         public IActionResult Index()
         {
+           
             return View();
         }
     }
