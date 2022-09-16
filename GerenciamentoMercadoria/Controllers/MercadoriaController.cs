@@ -61,6 +61,13 @@ namespace GerenciamentoMercadoria.Controllers
         [HttpPost]
         public IActionResult Inserir(Mercadoria mercadoria)
         {
+            ViewData["CategoriaId"] =
+               new SelectList(_mercadoriaRepository.Categorias(), "Id", "Nome");
+
+            ViewData["FabricanteId"] =
+                new SelectList(_mercadoriaRepository.Fabricantes(), "Id", "Nome");
+            
+
             try
             {
                 if (ModelState.IsValid)
@@ -75,8 +82,7 @@ namespace GerenciamentoMercadoria.Controllers
                         _mercadoriaRepository.Cadastrar(mercadoria);
                         TempData["Sucesso"] = "Inserido com sucesso!.";
                         return RedirectToAction("Inserir");
-                    }
-
+                    } 
                 }
                 return View(mercadoria);
             }
@@ -90,6 +96,12 @@ namespace GerenciamentoMercadoria.Controllers
         [HttpPost]
         public IActionResult Editar(Mercadoria mercadoria)
         {
+            ViewData["CategoriaId"] =
+                new SelectList(_mercadoriaRepository.Categorias(), "Id", "Nome");
+
+            ViewData["FabricanteId"] =
+                new SelectList(_mercadoriaRepository.Fabricantes(), "Id", "Nome");
+
             try
             {
                 if (_mercadoriaRepository.Listar().Any(p => p.Nome.Equals(mercadoria.Nome)))

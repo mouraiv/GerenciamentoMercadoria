@@ -54,6 +54,8 @@ namespace GerenciamentoEntrada.Controllers
         [HttpPost]
         public IActionResult Inserir(Entrada entrada)
         {
+            ViewData["MercadoriaId"] =
+                new SelectList(_entradaRepository.Mercadorias(), "Id", "Nome");
             try
             {
                 if (ModelState.IsValid)
@@ -74,6 +76,9 @@ namespace GerenciamentoEntrada.Controllers
         [HttpPost]
         public IActionResult Editar(Entrada entrada)
         {
+            ViewData["MercadoriaId"] =
+                new SelectList(_entradaRepository.Mercadorias(), "Id", "Nome");
+
             try
             {
               _entradaRepository.Atualizar(entrada);
