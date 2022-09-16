@@ -28,7 +28,6 @@ namespace GerenciamentoEntrada.Repository
             if (db == null) throw new Exception("Houve um erro na atualização");
 
             db.Quantidade = entrada.Quantidade;
-            db.DataHora = entrada.DataHora;
             db.Rua = entrada.Rua;
             db.Numero = entrada.Numero;
             db.Bairro = entrada.Bairro;
