@@ -1,9 +1,11 @@
 ﻿using GerenciamentoMercadoria.Context;
 using GerenciamentoMercadoria.Models;
+using GerenciamentoMercadoria.Repository.Interface;
+using Microsoft.EntityFrameworkCore;
 
 namespace GerenciamentoMercadoria.Repository
 {
-    public class MercadoriaRepository
+    public class MercadoriaRepository : IMercadoriaRepository
     {
         private readonly AppDbContext _context;
 
@@ -45,12 +47,24 @@ namespace GerenciamentoMercadoria.Repository
 
         public List<Mercadoria> Listar()
         {
-            return _context.Mercadorias.ToList();
+            return _context.Mercadorias
+                .Include(p => p.categoria)
+                .Include(p => p.fabricante).ToList();
         }
 
         public Mercadoria CarregarId(int id)
         {
             return _context.Mercadorias.FirstOrDefault(p => p.Id == id);
+        }
+
+        public IEnumerable<Fabricante> Fabricantes()
+        {
+            return _context.Fabricantes;
+        }
+
+        public IEnumerable<Categoria> Categorias()
+        {
+            return _context.Categorias;
         }
     }
 }

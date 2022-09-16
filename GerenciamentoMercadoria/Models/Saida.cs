@@ -19,8 +19,7 @@ namespace GerenciamentoMercadoria.Models
         public string Estado { get; set; }
         [Required]
         public int MercadoriaId { get; set; }
-        [Required]
-        public virtual Mercadoria mercadoria { get; set; }
+        public virtual Mercadoria? mercadoria { get; set; }
     }
 }
 

@@ -13,6 +13,7 @@ builder.Services.AddDbContext<AppDbContext>
     (options => options.UseSqlServer(builder.Configuration.GetConnectionString("AppDbContext")));
 builder.Services.AddScoped<ICategoriaRepository, CategoriaRepository>();
 builder.Services.AddScoped<IFabricanteRepository, FabricanteRepository>();
+builder.Services.AddScoped<IMercadoriaRepository, MercadoriaRepository>();
 
 var app = builder.Build();
 

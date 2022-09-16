@@ -20,12 +20,12 @@ namespace GerenciamentoMercadoria.Context
         {
             modelBuilder.Entity<Mercadoria>()
                 .HasOne(p => p.categoria)
-                .WithMany(p => p.Mercadorias)
+                .WithMany()
                 .HasForeignKey(p => p.CategoriaId);
 
             modelBuilder.Entity<Mercadoria>()
                .HasOne(p => p.fabricante)
-               .WithMany(p => p.Mercadorias)
+               .WithMany()
                .HasForeignKey(p => p.FabricanteId);
 
             modelBuilder.Entity<Entrada>()

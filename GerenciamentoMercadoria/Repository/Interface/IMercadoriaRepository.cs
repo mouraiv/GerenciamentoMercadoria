@@ -9,5 +9,7 @@ namespace GerenciamentoMercadoria.Repository.Interface
         bool Deletar(int id);
         List<Mercadoria> Listar();
         Mercadoria CarregarId(int id);
+        IEnumerable<Categoria> Categorias();
+        IEnumerable<Fabricante> Fabricantes();
     }
 }

@@ -1,6 +1,7 @@
 ﻿using GerenciamentoMercadoria.Models;
 using GerenciamentoMercadoria.Repository.Interface;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace GerenciamentoMercadoria.Controllers
 {
@@ -19,6 +20,11 @@ namespace GerenciamentoMercadoria.Controllers
         }
         public IActionResult Inserir()
         {
+            ViewData["CategoriaId"] =
+                    new SelectList(_mercadoriaRepository.Categorias(), "Id", "Nome");
+
+            ViewData["FabricanteId"] =
+                new SelectList(_mercadoriaRepository.Fabricantes(), "Id", "Nome");
             return View();
         }
         public IActionResult Editar(int id)
@@ -65,6 +71,11 @@ namespace GerenciamentoMercadoria.Controllers
                     }
 
                 }
+                ViewData["CategoriaId"] =
+                    new SelectList(_mercadoriaRepository.Categorias(), "Id", "Nome");
+         
+                ViewData["FabricanteId"] =
+                    new SelectList(_mercadoriaRepository.Fabricantes(), "Id", "Nome");
                 return View(mercadoria);
             }
             catch (Exception error)
