@@ -29,10 +29,14 @@ namespace GerenciamentoMercadoria.Context
                .HasForeignKey(p => p.FabricanteId);
 
             modelBuilder.Entity<Entrada>()
-               .HasOne(p => p.mercadoria);
+               .HasOne(p => p.mercadoria)
+               .WithMany()
+               .HasForeignKey(p => p.MercadoriaId);
 
             modelBuilder.Entity<Saida>()
-               .HasOne(p => p.mercadoria);
+               .HasOne(p => p.mercadoria)
+               .WithMany()
+               .HasForeignKey(p => p.MercadoriaId);
         }
     }
 }

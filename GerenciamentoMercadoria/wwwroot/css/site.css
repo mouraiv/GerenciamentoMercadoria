@@ -21,3 +21,15 @@ body {
     border: none;
     background: transparent;
 }
+
+.ui-datepicker-calendar {
+    display: none;
+}
+
+div.ui-datepicker-header
+a.ui-datepicker-prev, div.ui-datepicker-header
+a.ui-datepicker-next {
+    display: none;
+}
+
+

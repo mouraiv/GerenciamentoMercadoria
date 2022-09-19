@@ -47,7 +47,6 @@ namespace GerenciamentoEntrada.Repository
 
             _context.Entradas.Remove(db);
             _context.SaveChanges();
-
             return true;
         }
 
@@ -65,6 +64,15 @@ namespace GerenciamentoEntrada.Repository
         public IEnumerable<Mercadoria> Mercadorias()
         {
             return _context.Mercadorias;
+        }
+
+        public List<Entrada> Listar(string day, string mes, string ano)
+        {
+            DateTime mesInicio = DateTime.Parse($"1/{mes}/{ano}");
+            DateTime mesFim = DateTime.Parse($"{day}/{mes}/{ano}");
+
+            return _context.Entradas
+                .Include(p => p.mercadoria).Where(p => p.DataHora >= mesInicio && p.DataHora <= mesFim).ToList();
         }
     }
 }

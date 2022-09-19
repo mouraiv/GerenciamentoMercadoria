@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="09/18/2022 20:23:03" ReportInfo.Modified="09/18/2022 21:10:55" ReportInfo.CreatorVersion="2022.3.0.0">
+  <Dictionary>
+    <BusinessObjectDataSource Name="entradaList" ReferenceName="entradaList" DataType="null" Enabled="true">
+      <Column Name="Id" DataType="System.Int32"/>
+      <Column Name="Quantidade" DataType="System.Int32"/>
+      <Column Name="DataHora" DataType="null"/>
+      <Column Name="Rua" DataType="System.String"/>
+      <Column Name="Numero" DataType="System.Int32"/>
+      <Column Name="Bairro" DataType="System.String"/>
+      <Column Name="Estado" DataType="System.String"/>
+      <Column Name="MercadoriaId" DataType="System.Int32"/>
+      <Column Name="mercadoria" DataType="null">
+        <Column Name="Id" DataType="System.Int32"/>
+        <Column Name="Nome" DataType="System.String"/>
+        <Column Name="Descricao" DataType="System.String"/>
+        <Column Name="FabricanteId" DataType="System.Int32"/>
+        <Column Name="fabricante" DataType="null">
+          <Column Name="Id" DataType="System.Int32"/>
+          <Column Name="Nome" DataType="System.String"/>
+        </Column>
+        <Column Name="CategoriaId" DataType="System.Int32"/>
+        <Column Name="categoria" DataType="null">
+          <Column Name="Id" DataType="System.Int32"/>
+          <Column Name="Nome" DataType="System.String"/>
+        </Column>
+      </Column>
+    </BusinessObjectDataSource>
+  </Dictionary>
+  <ReportPage Name="Page1" Watermark.Font="Arial, 60pt">
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="75.6" Guides="47.25,75.6">
+      <TextObject Name="Text11" Left="170.1" Width="378" Height="75.6" Text="Mercadoria - Relatório de Entrada " HorzAlign="Center" VertAlign="Center" Font="Arial, 16pt, style=Bold"/>
+      <TextObject Name="Text12" Left="18.9" Top="9.45" Width="94.5" Height="18.9" Text="[Date]" Font="Arial, 12pt, style=Italic"/>
+    </ReportTitleBand>
+    <PageHeaderBand Name="PageHeader1" Top="79.6" Width="718.2" Height="28.35" Guides="28.35">
+      <TextObject Name="Text2" Left="18.9" Top="9.45" Width="85.05" Height="18.9" Text="Id" HorzAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text4" Left="255.15" Top="9.45" Width="151.2" Height="18.9" Text="Nome" HorzAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text6" Left="434.7" Top="9.45" Width="75.6" Height="18.9" Text="Quantidade" HorzAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text8" Left="132.3" Top="9.45" Width="94.5" Height="18.9" Text="DataHora" HorzAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text10" Left="548.1" Top="9.45" Width="94.5" Height="18.9" Text="Estado" HorzAlign="Center" Font="Arial, 10pt"/>
+    </PageHeaderBand>
+    <DataBand Name="Data1" Top="111.95" Width="718.2" Height="94.5" DataSource="entradaList">
+      <TextObject Name="Text1" Left="18.9" Top="18.9" Width="85.05" Height="18.9" Text="[entradaList.Id]" HorzAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text3" Left="255.15" Top="18.9" Width="151.2" Height="18.9" Text="[entradaList.mercadoria.Nome]" HorzAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text5" Left="434.7" Top="18.9" Width="75.6" Height="18.9" Text="[entradaList.Quantidade]" HorzAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text7" Left="132.3" Top="18.9" Width="94.5" Height="18.9" Text="[entradaList.DataHora]" HorzAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text9" Left="548.1" Top="18.9" Width="94.5" Height="18.9" Text="[entradaList.Estado]" HorzAlign="Center" Font="Arial, 10pt"/>
+    </DataBand>
+    <PageFooterBand Name="PageFooter1" Top="210.45" Width="718.2" Height="56.7">
+      <TextObject Name="Text13" Left="614.25" Top="28.35" Width="94.5" Height="18.9" Text="[Page]" Font="Arial, 12pt"/>
+    </PageFooterBand>
+  </ReportPage>
+</Report>

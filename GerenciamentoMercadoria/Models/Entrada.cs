@@ -4,6 +4,7 @@ namespace GerenciamentoMercadoria.Models
 {
     public class Entrada
     {
+ 
         [Key]
         public int Id { get; set; }
         [Required(ErrorMessage = "Campo obrigatório.")]

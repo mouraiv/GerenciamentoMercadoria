@@ -1,4 +1,5 @@
-﻿@model List<Entrada>
+﻿@using GerenciamentoMercadoria.Models.ViewModel
+@model EntradaViewModel
 @{
     ViewData["Title"] = "Entrada";
 }
@@ -19,47 +20,18 @@
             <strong>Error! </strong>@TempData["Falha"]
         </div>
     }
-
+    
     <h4>Lista de Entradas</h4>
     <div class="pt-4">
-        <a role="button" class="btn btn-success" asp-controller="Entrada" asp-action="Inserir">Adicionar</a>
-    </div>
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Tipo</th>
-                <th scope="col">Data / Hora</th>
-                <th scope="col">Produto</th>
-                <th scope="col">Quantidade</th>
-                <th scope="col">Estado(UF)</th>
-                <th scope="col"></th>
-            </tr>
-        </thead>
-        <tbody>
-            @if (Model != null && Model.Any())
-            {
-                foreach (Entrada Entrada in Model)
-                {
-                    <tr>
-                        <th scope="row">@Entrada.Id</th>
-                        <td>Entrada</td>
-                        <td>@Entrada.DataHora</td>
-                        <td>@Entrada.mercadoria.Nome</td>
-                        <td>@Entrada.Quantidade</td>
-                        <td>@Entrada.Estado</td>
-                        <td>
-                            <div class="btn-group" role="group" aria-label="Basic example">
-                                <a role="button" asp-route-id="@Entrada.Id" asp-controller="Entrada" asp-action="Editar" class="btn btn-primary">Editar</a>
-                                <a role="button" asp-route-id="@Entrada.Id" asp-controller="Entrada" asp-action="Confirmacao" class="btn btn-danger">Excluir</a>
-                            </div>
-                        </td>
-                    </tr>
-                }
-            }
-        </tbody>
-    </table>
-
+        <a role="button" asp-controller="Entrada" asp-action="Inserir" class="btn btn-success">Adicionar</a>
+        <a role="button" asp-controller="Entrada" asp-action="Relatorio" id="relatorio" class="btn btn-danger">Relatório</a>
+        <a role="button" asp-controller="Entrada" asp-action="Index" class="btn btn-primary">All</a>
+        <input asp-for="DataMes" name="DataMes" type="hidden" id="getData">
+        <div id="datepicker"></div>
+    </div> 
+    
+    <div id="listaEntrada">@Html.Partial("_Lista", Model);</div>
+    
 </div>
 
 

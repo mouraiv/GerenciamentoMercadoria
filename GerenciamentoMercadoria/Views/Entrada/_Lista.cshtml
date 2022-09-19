@@ -1,0 +1,39 @@
+﻿@using GerenciamentoMercadoria.Models.ViewModel
+@model EntradaViewModel
+
+<table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Tipo</th>
+                <th scope="col">Data / Hora</th>
+                <th scope="col">Produto</th>
+                <th scope="col">Quantidade</th>
+                <th scope="col">Estado(UF)</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Entrada != null && Model.Entrada.Any())
+            {
+                foreach (var entrada in Model.Entrada)
+                {
+                    <tr>
+                        <th scope="row">@entrada.Id</th>
+                        <td>Entrada</td>
+                        <td>@entrada.DataHora</td>
+                        <td>@entrada.mercadoria.Nome</td>
+                        <td>@entrada.Quantidade</td>
+                        <td>@entrada.Estado</td>
+                        <td>
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                                <a role="button" asp-route-id="@entrada.Id" asp-controller="Entrada" asp-action="Editar" class="btn btn-primary">Editar</a>
+                                <a role="button" asp-route-id="@entrada.Id" asp-controller="Entrada" asp-action="Confirmacao" class="btn btn-danger">Excluir</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+
