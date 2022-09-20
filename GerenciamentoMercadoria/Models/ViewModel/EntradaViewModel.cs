@@ -2,7 +2,7 @@
 {
     public class EntradaViewModel
     {
-        public List<Entrada> Entrada { get; set; }
+        public IEnumerable<Entrada> Entradas { get; set; }
         public DateTime DataMes { get; set; }
     }
 }

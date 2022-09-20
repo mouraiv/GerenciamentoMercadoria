@@ -11,13 +11,25 @@ $("#datepicker").datepicker({
         $.ajax({
             url: "/Entrada",
             type: "POST",
-            data: $('#getData').val('1/' + month + '/' + year),
+            data: { seachData: '1/' + month + '/' + year },
             dataType: "html"
 
         }).done(function (resposta) {
             $("#listaEntrada").html(resposta);
         });
     }
+});
+
+$('#Relatorio').click(function () {
+    $.ajax({
+        url: "/Entrada",
+        type: "GET",
+        data:"",
+        dataType: "html"
+
+    }).done(function (resposta) {
+        
+    });
 });
 
 

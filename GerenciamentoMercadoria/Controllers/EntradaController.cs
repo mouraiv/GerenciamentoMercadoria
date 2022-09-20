@@ -6,6 +6,7 @@ using GerenciamentoMercadoria.Models.ViewModel;
 using System.Globalization;
 using FastReport.Export.PdfSimple;
 using System.Diagnostics;
+using System.Collections.Generic;
 
 namespace GerenciamentoEntrada.Controllers
 {
@@ -21,10 +22,9 @@ namespace GerenciamentoEntrada.Controllers
         }
         public IActionResult Index()
         {
-            var model = new EntradaViewModel();
-            model.Entrada = _entradaRepository.Listar();
+            IEnumerable<Entrada> entrada = _entradaRepository.Listar();
        
-            return View(model);
+            return View(entrada);
         
         }
         public IActionResult Inserir()
@@ -101,23 +101,15 @@ namespace GerenciamentoEntrada.Controllers
             }
         }
         [HttpPost]
-        public IActionResult Index(EntradaViewModel entradaView) 
+        public IActionResult Index(DateTime seachData) 
         {
-            var diafim = DateTime.DaysInMonth(entradaView.DataMes.Year, entradaView.DataMes.Month).ToString("d2");
-            var mes = entradaView.DataMes.Month.ToString("d2");
-            var ano = entradaView.DataMes.Year.ToString();
-
-            entradaView.Entrada = _entradaRepository.Listar(diafim, mes, ano);
-
-            //TempData["listaEntrada"] = entradaView.Entrada;
-            //TempData["mes"] = diafim;
-            //TempData["ano"] = diafim;
+            IEnumerable<Entrada> entrada = _entradaRepository.Pesquisar(seachData);
 
             if (Request.IsHttps)
             {
-                return PartialView("_Lista",entradaView);
+                return PartialView("_Lista",entrada);
             }
-            return View(entradaView);
+            return View(entrada);
         }
         [HttpGet]
         public IActionResult Relatorio()
@@ -125,7 +117,7 @@ namespace GerenciamentoEntrada.Controllers
             var caminhoReport = Path.Combine(_webHostEnv.WebRootPath, @"Reports\ReportMvc.frx");
 
             var freport = new FastReport.Report();
-            //var diafim = TempData["listaEntrada"] as list;
+
             Debug.WriteLine("---------------");
             var entradaList = _entradaRepository.Listar();
 

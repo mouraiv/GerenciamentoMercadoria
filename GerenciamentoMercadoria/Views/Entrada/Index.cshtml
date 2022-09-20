@@ -1,5 +1,5 @@
 ﻿@using GerenciamentoMercadoria.Models.ViewModel
-@model EntradaViewModel
+@model IEnumerable<Entrada>
 @{
     ViewData["Title"] = "Entrada";
 }
@@ -24,9 +24,8 @@
     <h4>Lista de Entradas</h4>
     <div class="pt-4">
         <a role="button" asp-controller="Entrada" asp-action="Inserir" class="btn btn-success">Adicionar</a>
-        <a role="button" asp-controller="Entrada" asp-action="Relatorio" id="relatorio" class="btn btn-danger">Relatório</a>
-        <a role="button" asp-controller="Entrada" asp-action="Index" class="btn btn-primary">All</a>
-        <input asp-for="DataMes" name="DataMes" type="hidden" id="getData">
+        <a role="button" id="Relatorio" class="btn btn-primary">Relatótio</a>
+        <a role="button" asp-controller="Entrada" asp-action="Index" class="btn btn-danger">All</a>
         <div id="datepicker"></div>
     </div> 
     

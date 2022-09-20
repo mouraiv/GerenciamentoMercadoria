@@ -50,7 +50,7 @@ namespace GerenciamentoEntrada.Repository
             return true;
         }
 
-        public List<Entrada> Listar()
+        public IEnumerable<Entrada> Listar()
         {
             return _context.Entradas
                 .Include(p => p.mercadoria).ToList();
@@ -66,10 +66,10 @@ namespace GerenciamentoEntrada.Repository
             return _context.Mercadorias;
         }
 
-        public List<Entrada> Listar(string day, string mes, string ano)
+        public IEnumerable<Entrada> Pesquisar(DateTime data)
         {
-            DateTime mesInicio = DateTime.Parse($"1/{mes}/{ano}");
-            DateTime mesFim = DateTime.Parse($"{day}/{mes}/{ano}");
+            DateTime mesInicio = DateTime.Parse($"1/{data.Month}/{data.Year}");
+            DateTime mesFim = DateTime.Parse($"{DateTime.DaysInMonth(data.Year, data.Month)}/{data.Month}/{data.Year}");
 
             return _context.Entradas
                 .Include(p => p.mercadoria).Where(p => p.DataHora >= mesInicio && p.DataHora <= mesFim).ToList();

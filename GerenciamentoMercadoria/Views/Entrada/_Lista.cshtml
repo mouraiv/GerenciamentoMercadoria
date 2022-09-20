@@ -1,5 +1,5 @@
 ﻿@using GerenciamentoMercadoria.Models.ViewModel
-@model EntradaViewModel
+@model IEnumerable<Entrada> 
 
 <table class="table">
         <thead>
@@ -14,9 +14,9 @@
             </tr>
         </thead>
         <tbody>
-            @if (Model.Entrada != null && Model.Entrada.Any())
+            @if (Model != null && Model.Any())
             {
-                foreach (var entrada in Model.Entrada)
+                foreach (var entrada in Model)
                 {
                     <tr>
                         <th scope="row">@entrada.Id</th>
