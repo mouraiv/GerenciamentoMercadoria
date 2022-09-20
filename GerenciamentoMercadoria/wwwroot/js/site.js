@@ -18,18 +18,8 @@ $("#datepicker").datepicker({
             $("#listaEntrada").html(resposta);
         });
     }
-});
+ });
 
-$('#Relatorio').click(function () {
-    $.ajax({
-        url: "/Entrada",
-        type: "GET",
-        data:"",
-        dataType: "html"
 
-    }).done(function (resposta) {
-        
-    });
-});
 
 

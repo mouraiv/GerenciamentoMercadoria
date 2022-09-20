@@ -2,11 +2,10 @@
 using GerenciamentoEntrada.Repository.Interface;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using GerenciamentoMercadoria.Models.ViewModel;
-using System.Globalization;
 using FastReport.Export.PdfSimple;
 using System.Diagnostics;
-using System.Collections.Generic;
+using System.Text.Json;
+using Newtonsoft.Json;
 
 namespace GerenciamentoEntrada.Controllers
 {
@@ -104,27 +103,28 @@ namespace GerenciamentoEntrada.Controllers
         public IActionResult Index(DateTime seachData) 
         {
             IEnumerable<Entrada> entrada = _entradaRepository.Pesquisar(seachData);
+            TempData["Lista"] = JsonConvert.SerializeObject(entrada);
 
             if (Request.IsHttps)
             {
                 return PartialView("_Lista",entrada);
             }
-            return View(entrada);
+            return RedirectToAction("Relatorio");
         }
+
         [HttpGet]
         public IActionResult Relatorio()
         {
             var caminhoReport = Path.Combine(_webHostEnv.WebRootPath, @"Reports\ReportMvc.frx");
-
             var freport = new FastReport.Report();
 
-            Debug.WriteLine("---------------");
-            var entradaList = _entradaRepository.Listar();
+            var lista = JsonConvert.DeserializeObject<IEnumerable<Entrada>>(TempData["Lista"].ToString());
+            var entradaList = lista;
 
             freport.Report.Load(caminhoReport);
             freport.Dictionary.RegisterBusinessObject(entradaList, "entradaList", 10, true);
             freport.Prepare();
-
+            
             var pdfExport = new PDFSimpleExport();
 
             using MemoryStream ms = new MemoryStream();
@@ -133,6 +133,6 @@ namespace GerenciamentoEntrada.Controllers
 
             return File(ms.ToArray(), "application/pdf");
         }
-
+        
     }
 }
