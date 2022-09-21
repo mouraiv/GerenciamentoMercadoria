@@ -118,8 +118,7 @@ namespace GerenciamentoEntrada.Controllers
             var caminhoReport = Path.Combine(_webHostEnv.WebRootPath, @"Reports\ReportMvc.frx");
             var freport = new FastReport.Report();
 
-            var lista = JsonConvert.DeserializeObject<IEnumerable<Entrada>>(TempData["Lista"].ToString());
-            var entradaList = lista;
+            var entradaList = TempData["Lista"] == null ? _entradaRepository.Listar() : JsonConvert.DeserializeObject<IEnumerable<Entrada>>(TempData["Lista"].ToString());
 
             freport.Report.Load(caminhoReport);
             freport.Dictionary.RegisterBusinessObject(entradaList, "entradaList", 10, true);
