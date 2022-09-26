@@ -1,5 +1,6 @@
 ﻿@using GerenciamentoMercadoria.Models.ViewModel
-@model IEnumerable<Entrada>
+@using X.PagedList.Mvc.Core
+@model X.PagedList.PagedList<Entrada>
 @{
     ViewData["Title"] = "Entrada";
 }
@@ -31,6 +32,9 @@
         </div>
         <div class="p-2">
             <a role="button" asp-controller="Entrada" asp-action="Index" class="btn btn-primary">All</a>
+        </div>
+        <div class="p-2">
+            <input type="text" placeholder="Pesquisar produto" name="pesquisar" class="form-control">
         </div>
         <div class="p-2">
             <div id="datepicker"></div>

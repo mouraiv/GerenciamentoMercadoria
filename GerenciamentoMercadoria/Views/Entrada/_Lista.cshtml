@@ -1,5 +1,6 @@
 ﻿@using GerenciamentoMercadoria.Models.ViewModel
-@model IEnumerable<Entrada> 
+@using X.PagedList.Mvc.Core
+@model X.PagedList.PagedList<Entrada>
 
 <table class="table">
         <thead>
@@ -36,4 +37,12 @@
             }
         </tbody>
     </table>
+     
+<div class="d-flex justify-content-center">
+    @Html.PagedListPager(
+    Model, pagina => 
+    Url.Action("Index", new { pagina }), 
+    new X.PagedList.Web.Common.PagedListRenderOptions(){
+    LiElementClasses = new List<string>{"btn btn-outline-dark btn-sm"}
+    })</div>
 

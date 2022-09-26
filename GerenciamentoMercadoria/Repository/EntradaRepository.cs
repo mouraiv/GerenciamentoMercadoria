@@ -2,6 +2,7 @@
 using GerenciamentoMercadoria.Context;
 using GerenciamentoMercadoria.Models;
 using Microsoft.EntityFrameworkCore;
+using X.PagedList;
 
 namespace GerenciamentoEntrada.Repository
 {
@@ -50,10 +51,13 @@ namespace GerenciamentoEntrada.Repository
             return true;
         }
 
-        public IEnumerable<Entrada> Listar()
+        public IEnumerable<Entrada> Listar(int? pagina)
         {
+            int paginaTamanho = 10;
+            int paginaNumero = (pagina ?? 1);
+
             return _context.Entradas
-                .Include(p => p.mercadoria).ToList();
+                .Include(p => p.mercadoria).ToPagedList(paginaNumero, paginaTamanho);
         }
 
         public Entrada CarregarId(int id)
@@ -66,13 +70,15 @@ namespace GerenciamentoEntrada.Repository
             return _context.Mercadorias;
         }
 
-        public IEnumerable<Entrada> Pesquisar(DateTime data)
+        public IEnumerable<Entrada> Pesquisar(DateTime data, int? pagina)
         {
+            int paginaTamanho = 10;
+            int paginaNumero = (pagina ?? 1);
+
             DateTime mesInicio = DateTime.Parse($"1/{data.Month}/{data.Year}");
             DateTime mesFim = DateTime.Parse($"{DateTime.DaysInMonth(data.Year, data.Month)}/{data.Month}/{data.Year}");
 
-            return _context.Entradas
-                .Include(p => p.mercadoria).Where(p => p.DataHora >= mesInicio && p.DataHora <= mesFim).ToList();
+            return _context.Entradas.Include(p => p.mercadoria).Where(p => p.DataHora >= mesInicio && p.DataHora <= mesFim).ToPagedList(paginaNumero, paginaTamanho);
         }
     }
 }

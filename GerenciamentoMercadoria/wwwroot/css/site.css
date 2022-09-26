@@ -22,6 +22,16 @@ body {
     background: transparent;
 }
 
+.btn-outline-dark a{
+    color: #000 !important;
+    text-decoration: none !important;
+}
+
+.btn-outline-dark a:hover {
+    color: #fff !important;
+    text-decoration: none !important;
+}
+
 .ui-datepicker-calendar {
     display: none;
 }
@@ -73,6 +83,7 @@ a.ui-datepicker-next {
    border-radius: 0.25rem;
    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
+
 
 
 

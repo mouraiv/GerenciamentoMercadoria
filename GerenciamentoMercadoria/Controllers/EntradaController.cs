@@ -3,8 +3,6 @@ using GerenciamentoEntrada.Repository.Interface;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using FastReport.Export.PdfSimple;
-using System.Diagnostics;
-using System.Text.Json;
 using Newtonsoft.Json;
 
 namespace GerenciamentoEntrada.Controllers
@@ -19,9 +17,9 @@ namespace GerenciamentoEntrada.Controllers
             _entradaRepository = entradaRepository;
             _webHostEnv = webHostEnv;
         }
-        public IActionResult Index()
+        public IActionResult Index(int? pagina)
         {
-            IEnumerable<Entrada> entrada = _entradaRepository.Listar();
+            IEnumerable<Entrada> entrada = _entradaRepository.Listar(pagina);
        
             return View(entrada);
         
@@ -100,9 +98,9 @@ namespace GerenciamentoEntrada.Controllers
             }
         }
         [HttpPost]
-        public IActionResult Index(DateTime seachData) 
+        public IActionResult Index(DateTime seachData, int? pagina) 
         {
-            IEnumerable<Entrada> entrada = _entradaRepository.Pesquisar(seachData);
+            IEnumerable<Entrada> entrada = _entradaRepository.Pesquisar(seachData, pagina);
             TempData["Lista"] = JsonConvert.SerializeObject(entrada);
 
             if (Request.IsHttps)
@@ -118,10 +116,10 @@ namespace GerenciamentoEntrada.Controllers
             var caminhoReport = Path.Combine(_webHostEnv.WebRootPath, @"Reports\ReportMvc.frx");
             var freport = new FastReport.Report();
 
-            var entradaList = TempData["Lista"] == null ? _entradaRepository.Listar() : JsonConvert.DeserializeObject<IEnumerable<Entrada>>(TempData["Lista"].ToString());
+            /*var entradaList = TempData["Lista"] == null ? _entradaRepository.Listar() : JsonConvert.DeserializeObject<IEnumerable<Entrada>>(TempData["Lista"].ToString())*/;
 
             freport.Report.Load(caminhoReport);
-            freport.Dictionary.RegisterBusinessObject(entradaList, "entradaList", 10, true);
+            freport.Dictionary.RegisterBusinessObject(null, "entradaList", 10, true);
             freport.Prepare();
             
             var pdfExport = new PDFSimpleExport();
@@ -131,7 +129,6 @@ namespace GerenciamentoEntrada.Controllers
             ms.Flush();
 
             return File(ms.ToArray(), "application/pdf");
-        }
-        
+        }   
     }
 }
