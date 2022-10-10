@@ -1,7 +1,9 @@
-﻿using GerenciamentoEntrada.Repository.Interface;
+﻿using Castle.Core.Internal;
+using GerenciamentoEntrada.Repository.Interface;
 using GerenciamentoMercadoria.Context;
 using GerenciamentoMercadoria.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using X.PagedList;
 
 namespace GerenciamentoEntrada.Repository
@@ -70,7 +72,7 @@ namespace GerenciamentoEntrada.Repository
             return _context.Mercadorias;
         }
 
-        public IEnumerable<Entrada> Pesquisar(DateTime data, int? pagina)
+        public IEnumerable<Entrada> Pesquisar(DateTime data, string produto, int? pagina)
         {
             int paginaTamanho = 10;
             int paginaNumero = (pagina ?? 1);
@@ -78,7 +80,10 @@ namespace GerenciamentoEntrada.Repository
             DateTime mesInicio = DateTime.Parse($"1/{data.Month}/{data.Year}");
             DateTime mesFim = DateTime.Parse($"{DateTime.DaysInMonth(data.Year, data.Month)}/{data.Month}/{data.Year}");
 
-            return _context.Entradas.Include(p => p.mercadoria).Where(p => p.DataHora >= mesInicio && p.DataHora <= mesFim).ToPagedList(paginaNumero, paginaTamanho);
+            return _context.Entradas.Include(p => p.mercadoria)
+                    .Where(p => p.mercadoria.Nome.Contains(produto) ||
+                          p.DataHora >= mesInicio && p.DataHora <= mesFim).ToPagedList(paginaNumero, paginaTamanho);
+             
         }
     }
 }

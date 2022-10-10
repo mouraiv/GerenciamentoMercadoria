@@ -4,6 +4,17 @@
         $('.alert').hide('hide');
     });
 
+    $('#produto').on('input', function() {
+        $.ajax({
+            url: "/Entrada",
+            type: "POST",
+            data: { produto: $('#produto').val() },
+            dataType: "html"
+        }).done(function (resposta) {
+            $("#listaEntrada").html(resposta);
+        });
+    });
+
     $("#datepicker").datepicker({
         monthNamesShort: ["Janeiro", "Fevereiro", "Março", "Abril", "Março", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
         changeMonth: true,
@@ -21,7 +32,7 @@
                 $("#listaEntrada").html(resposta);
             });
         }
-    });
+    }).val('');
 });
 
 

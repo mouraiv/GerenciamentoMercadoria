@@ -8,7 +8,7 @@ namespace GerenciamentoEntrada.Repository.Interface
         Entrada Atualizar(Entrada entrada);
         bool Deletar(int id);
         IEnumerable<Entrada> Listar(int? pagina);
-        IEnumerable<Entrada> Pesquisar(DateTime data, int? pagina);
+        IEnumerable<Entrada> Pesquisar(DateTime data, string produto, int? pagina);
         Entrada CarregarId(int id);
         IEnumerable<Mercadoria> Mercadorias();
     }

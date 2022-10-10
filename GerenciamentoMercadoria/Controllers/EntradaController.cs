@@ -98,10 +98,10 @@ namespace GerenciamentoEntrada.Controllers
             }
         }
         [HttpPost]
-        public IActionResult Index(DateTime seachData, int? pagina) 
+        public IActionResult Index(DateTime seachData, string produto, int? pagina) 
         {
-            IEnumerable<Entrada> entrada = _entradaRepository.Pesquisar(seachData, pagina);
-            TempData["Lista"] = JsonConvert.SerializeObject(entrada);
+            IEnumerable<Entrada> entrada = _entradaRepository.Pesquisar(seachData, produto, pagina);
+            //TempData["Lista"] = JsonConvert.SerializeObject(entrada);
 
             if (Request.IsHttps)
             {
@@ -116,7 +116,7 @@ namespace GerenciamentoEntrada.Controllers
             var caminhoReport = Path.Combine(_webHostEnv.WebRootPath, @"Reports\ReportMvc.frx");
             var freport = new FastReport.Report();
 
-            /*var entradaList = TempData["Lista"] == null ? _entradaRepository.Listar() : JsonConvert.DeserializeObject<IEnumerable<Entrada>>(TempData["Lista"].ToString())*/;
+            //var entradaList = TempData["Lista"] == null ? _entradaRepository.Listar() : JsonConvert.DeserializeObject<IEnumerable<Entrada>>(TempData["Lista"].ToString());
 
             freport.Report.Load(caminhoReport);
             freport.Dictionary.RegisterBusinessObject(null, "entradaList", 10, true);
