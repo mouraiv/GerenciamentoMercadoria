@@ -98,7 +98,7 @@ namespace GerenciamentoEntrada.Controllers
             }
         }
         [HttpPost]
-        public IActionResult Index(DateTime seachData, string produto, int? pagina) 
+        public IActionResult Index(DateTime seachData,string produto, int? pagina) 
         {
             IEnumerable<Entrada> entrada = _entradaRepository.Pesquisar(seachData, produto, pagina);
             //TempData["Lista"] = JsonConvert.SerializeObject(entrada);
@@ -107,7 +107,7 @@ namespace GerenciamentoEntrada.Controllers
             {
                 return PartialView("_Lista",entrada);
             }
-            return RedirectToAction("Relatorio");
+            return View(entrada);
         }
 
         [HttpGet]

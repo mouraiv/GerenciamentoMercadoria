@@ -3,6 +3,7 @@ using GerenciamentoEntrada.Repository.Interface;
 using GerenciamentoMercadoria.Context;
 using GerenciamentoMercadoria.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
 using System.Linq;
 using X.PagedList;
 
@@ -80,9 +81,19 @@ namespace GerenciamentoEntrada.Repository
             DateTime mesInicio = DateTime.Parse($"1/{data.Month}/{data.Year}");
             DateTime mesFim = DateTime.Parse($"{DateTime.DaysInMonth(data.Year, data.Month)}/{data.Month}/{data.Year}");
 
-            return _context.Entradas.Include(p => p.mercadoria)
-                    .Where(p => p.mercadoria.Nome.Contains(produto) ||
-                          p.DataHora >= mesInicio && p.DataHora <= mesFim).ToPagedList(paginaNumero, paginaTamanho);
+            var query = _context.Entradas.Include(p => p.mercadoria)
+                .Where(p => p.DataHora >= mesInicio && p.DataHora <= mesFim)
+                .ToPagedList(paginaNumero, paginaTamanho);
+
+            Debug.WriteLine(produto);
+            Debug.WriteLine(data);
+
+            if (!produto.IsNullOrEmpty()) {
+                Debug.WriteLine("-------okokokok");
+                return query.Where(p => p.mercadoria.Nome.Contains(produto)).ToPagedList(paginaNumero, paginaTamanho);
+            }
+           
+            return query;
              
         }
     }
