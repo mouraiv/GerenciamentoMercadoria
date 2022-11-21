@@ -1,0 +1,41 @@
+﻿@using GerenciamentoMercadoria.Models.ViewModels;
+@using X.PagedList.Mvc.Core
+@model X.PagedList.PagedList<EntradaSaida>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Tipo</th>
+            <th scope="col">Data / Hora</th>
+            <th scope="col">Produto</th>
+            <th scope="col">Quantidade</th>
+            <th scope="col">Estado(UF)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            foreach (var entradaSaida in Model)
+            {
+                <tr>
+                    <td>@entradaSaida.Tipo</td>
+                    <td>@entradaSaida.DataHora</td>
+                    <td>@entradaSaida.mercadoria.Nome</td>
+                    <td>@entradaSaida.Quantidade</td>
+                    <td>@entradaSaida.Estado</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<div class="d-flex justify-content-center">
+    @Html.PagedListPager(
+    Model, pagina =>
+    Url.Action("Index", new { pagina }),
+    new X.PagedList.Web.Common.PagedListRenderOptions(){
+    LiElementClasses = new List<string>{"btn btn-outline-dark btn-sm"}
+    })
+</div>
+
+

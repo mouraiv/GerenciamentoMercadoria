@@ -1,10 +1,7 @@
-﻿using Castle.Core.Internal;
-using GerenciamentoEntrada.Repository.Interface;
+﻿using GerenciamentoEntrada.Repository.Interface;
 using GerenciamentoMercadoria.Context;
 using GerenciamentoMercadoria.Models;
 using Microsoft.EntityFrameworkCore;
-using System.Diagnostics;
-using System.Linq;
 using X.PagedList;
 
 namespace GerenciamentoEntrada.Repository
@@ -20,10 +17,11 @@ namespace GerenciamentoEntrada.Repository
 
         public Entrada Cadastrar(Entrada entrada)
         {
-            _context.Entradas.Add(entrada);
-            entrada.DataHora = DateTime.Now;
-            _context.SaveChanges();
-            return entrada;
+               _context.Entradas.Add(entrada);
+               entrada.Tipo = "Entrada";
+               entrada.DataHora = DateTime.Now;
+               _context.SaveChanges();
+               return entrada;
         }
         public Entrada Atualizar(Entrada entrada)
         {
@@ -60,7 +58,8 @@ namespace GerenciamentoEntrada.Repository
             int paginaNumero = (pagina ?? 1);
 
             return _context.Entradas
-                .Include(p => p.mercadoria).ToPagedList(paginaNumero, paginaTamanho);
+                .Include(p => p.mercadoria)
+                    .ToList().ToPagedList(paginaNumero, paginaTamanho);
         }
 
         public Entrada CarregarId(int id)
@@ -73,7 +72,7 @@ namespace GerenciamentoEntrada.Repository
             return _context.Mercadorias;
         }
 
-        public IEnumerable<Entrada> Pesquisar(DateTime data, string produto, int? pagina)
+        public IEnumerable<Entrada> Pesquisar(DateTime data, int? pagina)
         {
             int paginaTamanho = 10;
             int paginaNumero = (pagina ?? 1);
@@ -84,15 +83,7 @@ namespace GerenciamentoEntrada.Repository
             var query = _context.Entradas.Include(p => p.mercadoria)
                 .Where(p => p.DataHora >= mesInicio && p.DataHora <= mesFim)
                 .ToPagedList(paginaNumero, paginaTamanho);
-
-            Debug.WriteLine(produto);
-            Debug.WriteLine(data);
-
-            if (!produto.IsNullOrEmpty()) {
-                Debug.WriteLine("-------okokokok");
-                return query.Where(p => p.mercadoria.Nome.Contains(produto)).ToPagedList(paginaNumero, paginaTamanho);
-            }
-           
+   
             return query;
              
         }

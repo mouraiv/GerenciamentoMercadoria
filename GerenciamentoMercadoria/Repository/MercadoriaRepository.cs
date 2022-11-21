@@ -52,7 +52,7 @@ namespace GerenciamentoMercadoria.Repository
         {
             return _context.Mercadorias
                 .Include(p => p.categoria)
-                .Include(p => p.fabricante).ToList();
+                .Include(p => p.Fabricante).ToList();
         }
 
         public Mercadoria CarregarId(int id)

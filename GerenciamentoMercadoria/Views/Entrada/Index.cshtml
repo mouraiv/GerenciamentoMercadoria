@@ -1,5 +1,4 @@
-﻿@using GerenciamentoMercadoria.Models.ViewModel
-@using X.PagedList.Mvc.Core
+﻿@using X.PagedList.Mvc.Core
 @model X.PagedList.PagedList<Entrada>
 @{
     ViewData["Title"] = "Entrada";
@@ -21,7 +20,7 @@
             <strong>Error! </strong>@TempData["Falha"]
         </div>
     }
-    
+
     <h4>Lista de Entradas</h4>
     <div class="pt-4">
         <a role="button" asp-controller="Entrada" asp-action="Inserir" class="btn btn-success">Adicionar</a>
@@ -34,10 +33,7 @@
             <a role="button" asp-controller="Entrada" asp-action="Index" class="btn btn-primary">All</a>
         </div>
         <div class="p-2">
-            <input type="text" placeholder="Pesquisar produto" id="produto" name="produto" class="form-control">
-        </div>
-        <div class="p-2">
-            <div id="datepicker"></div>
+            <div id="entrada"></div>
         </div>
     </div>
     

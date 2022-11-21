@@ -4,7 +4,6 @@ using GerenciamentoMercadoria.Context;
 using GerenciamentoMercadoria.Repository;
 using GerenciamentoMercadoria.Repository.Interface;
 using Microsoft.EntityFrameworkCore;
-using System.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -98,9 +98,9 @@ namespace GerenciamentoEntrada.Controllers
             }
         }
         [HttpPost]
-        public IActionResult Index(DateTime seachData,string produto, int? pagina) 
+        public IActionResult Index(DateTime seachData, int? pagina) 
         {
-            IEnumerable<Entrada> entrada = _entradaRepository.Pesquisar(seachData, produto, pagina);
+            IEnumerable<Entrada> entrada = _entradaRepository.Pesquisar(seachData, pagina);
             //TempData["Lista"] = JsonConvert.SerializeObject(entrada);
 
             if (Request.IsHttps)

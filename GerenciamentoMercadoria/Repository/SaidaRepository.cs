@@ -2,6 +2,7 @@
 using GerenciamentoMercadoria.Models;
 using GerenciamentoMercadoria.Repository.Interface;
 using Microsoft.EntityFrameworkCore;
+using X.PagedList;
 
 namespace GerenciamentoMercadoria.Repository
 {
@@ -17,6 +18,7 @@ namespace GerenciamentoMercadoria.Repository
         public Saida Cadastrar(Saida saida)
         {
             _context.Saidas.Add(saida);
+            saida.Tipo = "Saida";
             saida.DataHora = DateTime.Now;
             _context.SaveChanges();
             return saida;
@@ -51,10 +53,30 @@ namespace GerenciamentoMercadoria.Repository
             return true;
         }
 
-        public List<Saida> Listar()
+        public IEnumerable<Saida> Listar(int? pagina)
         {
+            int paginaTamanho = 10;
+            int paginaNumero = (pagina ?? 1);
+
             return _context.Saidas
-                .Include(p => p.mercadoria).ToList();
+                .Include(p => p.mercadoria)
+                    .ToList().ToPagedList(paginaNumero, paginaTamanho);
+        }
+
+        public IEnumerable<Saida> Pesquisar(DateTime data, int? pagina)
+        {
+            int paginaTamanho = 10;
+            int paginaNumero = (pagina ?? 1);
+
+            DateTime mesInicio = DateTime.Parse($"1/{data.Month}/{data.Year}");
+            DateTime mesFim = DateTime.Parse($"{DateTime.DaysInMonth(data.Year, data.Month)}/{data.Month}/{data.Year}");
+
+            var query = _context.Saidas.Include(p => p.mercadoria)
+                .Where(p => p.DataHora >= mesInicio && p.DataHora <= mesFim)
+                .ToPagedList(paginaNumero, paginaTamanho);
+
+            return query;
+
         }
 
         public Saida CarregarId(int id)

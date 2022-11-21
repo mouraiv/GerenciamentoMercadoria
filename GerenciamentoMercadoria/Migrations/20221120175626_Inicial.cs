@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -42,7 +41,7 @@ namespace GerenciamentoMercadoria.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nome = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Descricao = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Descricao = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
                     FabricanteId = table.Column<int>(type: "int", nullable: false),
                     CategoriaId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -69,11 +68,12 @@ namespace GerenciamentoMercadoria.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Tipo = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Quantidade = table.Column<int>(type: "int", nullable: false),
-                    DataHora = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Rua = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DataHora = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Rua = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
                     Numero = table.Column<int>(type: "int", nullable: false),
-                    Bairro = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Bairro = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Estado = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     MercadoriaId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -94,8 +94,9 @@ namespace GerenciamentoMercadoria.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Tipo = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Quantidade = table.Column<int>(type: "int", nullable: false),
-                    DataHora = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DataHora = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Rua = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Numero = table.Column<int>(type: "int", nullable: false),
                     Bairro = table.Column<string>(type: "nvarchar(max)", nullable: false),

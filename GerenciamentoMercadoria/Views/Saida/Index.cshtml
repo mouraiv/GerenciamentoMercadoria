@@ -1,4 +1,5 @@
-﻿@model List<Saida>
+﻿@using X.PagedList.Mvc.Core
+@model X.PagedList.PagedList<Saida>
 @{
     ViewData["Title"] = "Saida";
 }
@@ -22,43 +23,21 @@
 
     <h4>Lista de Saidas</h4>
     <div class="pt-4">
-        <a role="button" class="btn btn-danger" asp-controller="Saida" asp-action="Inserir">Adicionar</a>
+        <a role="button" asp-controller="Saida" asp-action="Inserir" class="btn btn-success">Adicionar</a>
     </div>
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Tipo</th>
-                <th scope="col">Data / Hora</th>
-                <th scope="col">Produto</th>
-                <th scope="col">Quantidade</th>
-                <th scope="col">Estado(UF)</th>
-                <th scope="col"></th>
-            </tr>
-        </thead>
-        <tbody>
-            @if (Model != null && Model.Any())
-            {
-                foreach (Saida Saida in Model)
-                {
-                    <tr>
-                        <th scope="row">@Saida.Id</th>
-                        <td>Saida</td>
-                        <td>@Saida.DataHora</td>
-                        <td>@Saida.mercadoria.Nome</td>
-                        <td>@Saida.Quantidade</td>
-                        <td>@Saida.Estado</td>
-                        <td>
-                            <div class="btn-group" role="group" aria-label="Basic example">
-                                <a role="button" asp-route-id="@Saida.Id" asp-controller="Saida" asp-action="Editar" class="btn btn-primary">Editar</a>
-                                <a role="button" asp-route-id="@Saida.Id" asp-controller="Saida" asp-action="Confirmacao" class="btn btn-danger">Excluir</a>
-                            </div>
-                        </td>
-                    </tr>
-                }
-            }
-        </tbody>
-    </table>
+    <div class="d-flex justify-content-end">
+        <div class="p-2">
+            <a role="button" asp-controller="Saida" asp-action="" class="btn btn-primary">Relatório</a>
+        </div>
+        <div class="p-2">
+            <a role="button" asp-controller="Saida" asp-action="Index" class="btn btn-primary">All</a>
+        </div>
+        <div class="p-2">
+            <div id="saida"></div>
+        </div>
+    </div>
+
+    <div id="listaSaida">@Html.Partial("_Lista", Model)</div>
 
 </div>
 

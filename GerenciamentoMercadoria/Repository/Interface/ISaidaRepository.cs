@@ -7,7 +7,8 @@ namespace GerenciamentoMercadoria.Repository.Interface
         Saida Cadastrar(Saida saida);
         Saida Atualizar(Saida saida);
         bool Deletar(int id);
-        List<Saida> Listar();
+        IEnumerable<Saida> Listar(int? pagina);
+        IEnumerable<Saida> Pesquisar(DateTime data, int? pagina);
         Saida CarregarId(int id);
         IEnumerable<Mercadoria> Mercadorias();
     }

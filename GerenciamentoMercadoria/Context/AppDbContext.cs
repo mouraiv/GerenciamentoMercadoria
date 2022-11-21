@@ -1,4 +1,5 @@
 ﻿using GerenciamentoMercadoria.Models;
+using GerenciamentoMercadoria.Models.ViewModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace GerenciamentoMercadoria.Context
@@ -15,6 +16,7 @@ namespace GerenciamentoMercadoria.Context
         public DbSet<Categoria> Categorias { get; set; }
         public DbSet<Entrada> Entradas { get; set; }
         public DbSet<Saida> Saidas { get; set; }
+        public DbSet<EntradaSaida> EntradaSaidas { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -24,7 +26,7 @@ namespace GerenciamentoMercadoria.Context
                 .HasForeignKey(p => p.CategoriaId);
 
             modelBuilder.Entity<Mercadoria>()
-               .HasOne(p => p.fabricante)
+               .HasOne(p => p.Fabricante)
                .WithMany()
                .HasForeignKey(p => p.FabricanteId);
 
@@ -37,6 +39,9 @@ namespace GerenciamentoMercadoria.Context
                .HasOne(p => p.mercadoria)
                .WithMany()
                .HasForeignKey(p => p.MercadoriaId);
+
+            modelBuilder.Entity<EntradaSaida>()
+               .ToView("EntradaSaidaView");
         }
     }
 }

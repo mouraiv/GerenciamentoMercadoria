@@ -14,9 +14,9 @@ namespace GerenciamentoMercadoria.Models
         public string Descricao { get; set; }
         [Required(ErrorMessage = "Campo obrigatório.")]
         public int FabricanteId { get; set; }
-        public virtual Fabricante? fabricante { get; set; }
+        public Fabricante? Fabricante { get; set; }
         [Required(ErrorMessage = "Campo obrigatório.")]
         public int CategoriaId { get; set; }
-        public virtual Categoria? categoria { get; set; }
+        public Categoria? categoria { get; set; }
     }
 }

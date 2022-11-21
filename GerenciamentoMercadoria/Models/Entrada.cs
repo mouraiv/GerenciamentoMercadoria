@@ -7,6 +7,7 @@ namespace GerenciamentoMercadoria.Models
  
         [Key]
         public int Id { get; set; }
+        public string? Tipo { get; set; }
         [Required(ErrorMessage = "Campo obrigatório.")]
         public int Quantidade { get; set; }
         public DateTime? DataHora { get; set; }
@@ -22,6 +23,6 @@ namespace GerenciamentoMercadoria.Models
         public string Estado { get; set; }
         [Required]
         public int MercadoriaId { get; set; }
-        public virtual Mercadoria? mercadoria { get; set; }
+        public Mercadoria? mercadoria { get; set; }
     }
 }

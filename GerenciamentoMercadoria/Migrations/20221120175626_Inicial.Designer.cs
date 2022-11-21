@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GerenciamentoMercadoria.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220913210100_Inicial")]
+    [Migration("20221120175626_Inicial")]
     partial class Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -52,9 +52,10 @@ namespace GerenciamentoMercadoria.Migrations
 
                     b.Property<string>("Bairro")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
-                    b.Property<DateTime>("DataHora")
+                    b.Property<DateTime?>("DataHora")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Estado")
@@ -71,6 +72,11 @@ namespace GerenciamentoMercadoria.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Rua")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<string>("Tipo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -112,8 +118,8 @@ namespace GerenciamentoMercadoria.Migrations
 
                     b.Property<string>("Descricao")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
 
                     b.Property<int>("FabricanteId")
                         .HasColumnType("int");
@@ -164,11 +170,53 @@ namespace GerenciamentoMercadoria.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Tipo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("MercadoriaId");
 
                     b.ToTable("Saidas");
+                });
+
+            modelBuilder.Entity("GerenciamentoMercadoria.Models.ViewModels.EntradaSaida", b =>
+                {
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Bairro")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("DataHora")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Estado")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("MercadoriaId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Numero")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantidade")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Rua")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MercadoriaId");
+
+                    b.ToView("EntradaSaidaView");
                 });
 
             modelBuilder.Entity("GerenciamentoMercadoria.Models.Entrada", b =>
@@ -185,20 +233,20 @@ namespace GerenciamentoMercadoria.Migrations
             modelBuilder.Entity("GerenciamentoMercadoria.Models.Mercadoria", b =>
                 {
                     b.HasOne("GerenciamentoMercadoria.Models.Categoria", "categoria")
-                        .WithMany("Mercadorias")
+                        .WithMany()
                         .HasForeignKey("CategoriaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("GerenciamentoMercadoria.Models.Fabricante", "fabricante")
-                        .WithMany("Mercadorias")
+                    b.HasOne("GerenciamentoMercadoria.Models.Fabricante", "Fabricante")
+                        .WithMany()
                         .HasForeignKey("FabricanteId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("categoria");
+                    b.Navigation("Fabricante");
 
-                    b.Navigation("fabricante");
+                    b.Navigation("categoria");
                 });
 
             modelBuilder.Entity("GerenciamentoMercadoria.Models.Saida", b =>
@@ -212,14 +260,15 @@ namespace GerenciamentoMercadoria.Migrations
                     b.Navigation("mercadoria");
                 });
 
-            modelBuilder.Entity("GerenciamentoMercadoria.Models.Categoria", b =>
+            modelBuilder.Entity("GerenciamentoMercadoria.Models.ViewModels.EntradaSaida", b =>
                 {
-                    b.Navigation("Mercadorias");
-                });
+                    b.HasOne("GerenciamentoMercadoria.Models.Mercadoria", "mercadoria")
+                        .WithMany()
+                        .HasForeignKey("MercadoriaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-            modelBuilder.Entity("GerenciamentoMercadoria.Models.Fabricante", b =>
-                {
-                    b.Navigation("Mercadorias");
+                    b.Navigation("mercadoria");
                 });
 #pragma warning restore 612, 618
         }

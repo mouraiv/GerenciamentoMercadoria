@@ -1,26 +1,18 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace GerenciamentoMercadoria.Models
+namespace GerenciamentoMercadoria.Models.ViewModels
 {
-    public class Saida
+    public class EntradaSaida
     {
-        [Key]
         public int Id { get; set; }
-        public string? Tipo { get; set; }
-        [Required]
+        public string Tipo { get; set; }
         public int Quantidade { get; set; }
         public DateTime? DataHora { get; set; }
-        [Required]
         public string Rua { get; set; }
-        [Required]
         public int Numero { get; set; }
-        [Required]
         public string Bairro { get; set; }
-        [Required]
         public string Estado { get; set; }
-        [Required]
         public int MercadoriaId { get; set; }
         public Mercadoria? mercadoria { get; set; }
     }
 }
-
