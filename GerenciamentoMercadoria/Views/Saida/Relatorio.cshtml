@@ -1,0 +1,37 @@
+﻿@model List<Saida>
+@{
+    ViewData["Title"] = "Saida";
+}
+
+<div class="text-left">
+    <h3>Lista de Saida</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Tipo</th>
+                <th scope="col">Data / Hora</th>
+                <th scope="col">Produto</th>
+                <th scope="col">Quantidade</th>
+                <th scope="col">Estado(UF)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                foreach (Saida Saida in Model)
+                {
+                    <tr>
+                        <th scope="row">@Saida.Id</th>
+                        <td>@Saida.Tipo</td>
+                        <td>@Saida.DataHora</td>
+                        <td>@Saida.mercadoria.Nome</td>
+                        <td>@Saida.Quantidade</td>
+                        <td>@Saida.Estado</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+
+</div>

@@ -4,6 +4,7 @@ using GerenciamentoMercadoria.Context;
 using GerenciamentoMercadoria.Repository;
 using GerenciamentoMercadoria.Repository.Interface;
 using Microsoft.EntityFrameworkCore;
+using Rotativa.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +21,9 @@ builder.Services.AddScoped<IMercadoriaRepository, MercadoriaRepository>();
 builder.Services.AddScoped<IHomeRepository, HomeRepository>();
 
 var app = builder.Build();
+
+IWebHostEnvironment env = app.Environment;
+RotativaConfiguration.Setup((Microsoft.AspNetCore.Hosting.IHostingEnvironment)env);
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

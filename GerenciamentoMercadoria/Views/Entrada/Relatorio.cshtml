@@ -4,26 +4,7 @@
 }
 
 <div class="text-left">
-
-    @if (TempData["Sucesso"] != null)
-    {
-        <div class="alert alert-success" role="alert">
-            <button type="button" class="close-alert text-success" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <strong>Sucesso! </strong>@TempData["Sucesso"]
-        </div>
-    }
-    @if (TempData["Falha"] != null)
-    {
-        <div class="alert alert-danger" role="alert">
-            <button type="button" class="close-alert text-danger" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <strong>Error! </strong>@TempData["Falha"]
-        </div>
-    }
-
     <h4>Lista de Entradas</h4>
-    <div class="pt-4">
-        <a role="button" asp-controller="Entrada" asp-action="Relatorio" asp-route-mes="9" class="btn btn-danger mt-2">Gerar</a>
-    </div>
     <table class="table">
         <thead>
             <tr>
@@ -33,7 +14,6 @@
                 <th scope="col">Produto</th>
                 <th scope="col">Quantidade</th>
                 <th scope="col">Estado(UF)</th>
-                <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
@@ -43,17 +23,11 @@
                 {
                     <tr>
                         <th scope="row">@Entrada.Id</th>
-                        <td>Entrada</td>
+                        <td>@Entrada.Tipo</td>
                         <td>@Entrada.DataHora</td>
                         <td>@Entrada.mercadoria.Nome</td>
                         <td>@Entrada.Quantidade</td>
                         <td>@Entrada.Estado</td>
-                        <td>
-                            <div class="btn-group" role="group" aria-label="Basic example">
-                                <a role="button" asp-route-id="@Entrada.Id" asp-controller="Entrada" asp-action="Editar" class="btn btn-primary">Editar</a>
-                                <a role="button" asp-route-id="@Entrada.Id" asp-controller="Entrada" asp-action="Confirmacao" class="btn btn-danger">Excluir</a>
-                            </div>
-                        </td>
                     </tr>
                 }
             }

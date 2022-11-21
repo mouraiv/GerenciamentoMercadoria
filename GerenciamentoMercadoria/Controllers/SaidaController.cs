@@ -3,6 +3,8 @@ using GerenciamentoMercadoria.Models;
 using GerenciamentoMercadoria.Repository.Interface;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Newtonsoft.Json;
+using Rotativa.AspNetCore;
 
 namespace GerenciamentoMercadoria.Controllers
 {
@@ -98,7 +100,9 @@ namespace GerenciamentoMercadoria.Controllers
         public IActionResult Index(DateTime seachData, int? pagina)
         {
             IEnumerable<Saida> saida = _saidaRepository.Pesquisar(seachData, pagina);
-            //TempData["Lista"] = JsonConvert.SerializeObject(saida);
+            IEnumerable<Saida> saidaRelatorio = _saidaRepository.Relatorio(seachData);
+
+            TempData["Lista"] = JsonConvert.SerializeObject(saidaRelatorio);
 
             if (Request.IsHttps)
             {
@@ -108,24 +112,21 @@ namespace GerenciamentoMercadoria.Controllers
         }
 
         [HttpGet]
-        public IActionResult Relatorio()
+        public IActionResult Relatorio(DateTime seachData)
         {
-            var caminhoReport = Path.Combine(_webHostEnv.WebRootPath, @"Reports\ReportMvc.frx");
-            var freport = new FastReport.Report();
+            return View();
+        }
+        public IActionResult ExportPdf()
+        {
+            var data = DateTime.Parse($"1/{ DateTime.Now.Month}/{DateTime.Now.Year}");
+            var saidaList = (TempData["Lista"] == null) ? _saidaRepository.Relatorio(data).ToList() : JsonConvert.DeserializeObject<IEnumerable<Saida>>(TempData["Lista"].ToString());
 
-            //var saidaList = TempData["Lista"] == null ? _entradaRepository.Listar() : JsonConvert.DeserializeObject<IEnumerable<Entrada>>(TempData["Lista"].ToString());
-
-            freport.Report.Load(caminhoReport);
-            freport.Dictionary.RegisterBusinessObject(null, "saidaList", 10, true);
-            freport.Prepare();
-
-            var pdfExport = new PDFSimpleExport();
-
-            using MemoryStream ms = new MemoryStream();
-            pdfExport.Export(freport, ms);
-            ms.Flush();
-
-            return File(ms.ToArray(), "application/pdf");
+            var pdf = new ViewAsPdf
+            {
+                ViewName = "Relatorio",
+                Model = saidaList
+            };
+            return pdf;
         }
 
     }

@@ -20,6 +20,7 @@
             }, function (resposta) {
                 $("#listaEntrada").html(resposta);
             })
+
         }
     });
 

@@ -79,6 +79,22 @@ namespace GerenciamentoMercadoria.Repository
 
         }
 
+        public IEnumerable<Saida> Relatorio(DateTime data)
+        {
+            DateTime mesInicio = DateTime.Parse($"1/{data.Month}/{data.Year}");
+            DateTime mesFim = DateTime.Parse($"{DateTime.DaysInMonth(data.Year, data.Month)}/{data.Month}/{data.Year}");
+
+            var query = _context.Saidas.Include(p => p.mercadoria)
+              .Where(p => p.DataHora >= mesInicio && p.DataHora <= mesFim).ToList();
+
+            if (!data.Equals("01/01/0001 00:00:00"))
+            {
+                return query;
+            }
+
+            return _context.Saidas.Include(p => p.mercadoria).ToList();
+        }
+
         public Saida CarregarId(int id)
         {
             return _context.Saidas.FirstOrDefault(p => p.Id == id);
