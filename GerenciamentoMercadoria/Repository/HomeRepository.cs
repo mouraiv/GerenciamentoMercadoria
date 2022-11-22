@@ -1,4 +1,5 @@
 ﻿using GerenciamentoMercadoria.Context;
+using GerenciamentoMercadoria.Models;
 using GerenciamentoMercadoria.Models.ViewModels;
 using GerenciamentoMercadoria.Repository.Interface;
 using Microsoft.EntityFrameworkCore;
@@ -44,6 +45,22 @@ namespace GerenciamentoMercadoria.Repository
                                     .ToPagedList(paginaNumero, paginaTamanho);
 
             return query;
+        }
+
+        public IEnumerable<EntradaSaida> Relatorio(DateTime data)
+        {
+            DateTime mesInicio = DateTime.Parse($"1/{data.Month}/{data.Year}");
+            DateTime mesFim = DateTime.Parse($"{DateTime.DaysInMonth(data.Year, data.Month)}/{data.Month}/{data.Year}");
+
+            var query = _context.EntradaSaidas.Include(p => p.mercadoria)
+              .Where(p => p.DataHora >= mesInicio && p.DataHora <= mesFim).ToList();
+
+            if (!data.Equals("01/01/0001 00:00:00"))
+            {
+                return query;
+            }
+
+            return _context.EntradaSaidas.Include(p => p.mercadoria).ToList();
         }
     }
 }

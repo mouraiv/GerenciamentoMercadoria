@@ -1,19 +1,18 @@
 ﻿using GerenciamentoMercadoria.Models.ViewModels;
 using GerenciamentoMercadoria.Repository.Interface;
 using Microsoft.AspNetCore.Mvc;
-using System.Data;
+using Newtonsoft.Json;
+using Rotativa.AspNetCore;
 
 namespace GerenciamentoMercadoria.Controllers
 {
     public class HomeController : Controller
     {
         private readonly IHomeRepository _homeRepository;
-        public readonly IWebHostEnvironment _webHostEnv;
 
-        public HomeController(IWebHostEnvironment webHostEnv, IHomeRepository homeRepository)
+        public HomeController(IHomeRepository homeRepository)
         {
             _homeRepository = homeRepository;
-            _webHostEnv = webHostEnv;
         }
         public IActionResult Index(int? pagina)
         {
@@ -32,7 +31,9 @@ namespace GerenciamentoMercadoria.Controllers
         public IActionResult Index(DateTime seachData, int? pagina)
         {
             IEnumerable<EntradaSaida> entradaSaida = _homeRepository.Pesquisar(seachData, pagina);
-            //TempData["Lista"] = JsonConvert.SerializeObject(entrada);
+            IEnumerable<EntradaSaida> entradaRelatorio = _homeRepository.Relatorio(seachData);
+
+            TempData["Lista"] = JsonConvert.SerializeObject(entradaRelatorio);
 
             if (Request.IsHttps)
             {
@@ -40,6 +41,23 @@ namespace GerenciamentoMercadoria.Controllers
             }
             return View(entradaSaida);
         }
-       
+        [HttpGet]
+        public IActionResult Relatorio()
+        {
+            return View();
+        }
+        public IActionResult ExportPdf()
+        {
+            var data = DateTime.Parse($"1/{DateTime.Now.Month}/{DateTime.Now.Year}");
+            var entradaSaidaList = (TempData["Lista"] == null) ? _homeRepository.Relatorio(data).ToList() : JsonConvert.DeserializeObject<IEnumerable<EntradaSaida>>(TempData["Lista"].ToString());
+
+            var pdf = new ViewAsPdf
+            {
+                ViewName = "Relatorio",
+                Model = entradaSaidaList
+            };
+            return pdf;
+        }
+
     }
 }

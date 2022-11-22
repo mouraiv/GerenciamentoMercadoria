@@ -1,10 +1,11 @@
-﻿@model List<Entrada>
+﻿@using GerenciamentoMercadoria.Models.ViewModels;
+@model List<EntradaSaida>
 @{
-    ViewData["Title"] = "Entrada";
+    ViewData["Title"] = "EntradaSaida";
 }
 
 <div class="text-left">
-    <h3>Lista de Entradas</h3>
+    <h3>Lista de Saida</h3>
     <table class="table">
         <thead>
             <tr>
@@ -19,15 +20,15 @@
         <tbody>
             @if (Model != null && Model.Any())
             {
-                foreach (Entrada Entrada in Model)
+                foreach (EntradaSaida EntradaSaida in Model)
                 {
                     <tr>
-                        <th scope="row">@Entrada.Id</th>
-                        <td>@Entrada.Tipo</td>
-                        <td>@Entrada.DataHora</td>
-                        <td>@Entrada.mercadoria.Nome</td>
-                        <td>@Entrada.Quantidade</td>
-                        <td>@Entrada.Estado</td>
+                        <th scope="row">@EntradaSaida.Id</th>
+                        <td>@EntradaSaida.Tipo</td>
+                        <td>@EntradaSaida.DataHora</td>
+                        <td>@EntradaSaida.mercadoria.Nome</td>
+                        <td>@EntradaSaida.Quantidade</td>
+                        <td>@EntradaSaida.Estado</td>
                     </tr>
                 }
             }

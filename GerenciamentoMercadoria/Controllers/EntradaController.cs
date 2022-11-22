@@ -10,12 +10,10 @@ namespace GerenciamentoEntrada.Controllers
     public class EntradaController : Controller
     {
         private readonly IEntradaRepository _entradaRepository;
-        public readonly IWebHostEnvironment _webHostEnv;
 
-        public EntradaController(IWebHostEnvironment webHostEnv, IEntradaRepository entradaRepository)
+        public EntradaController(IEntradaRepository entradaRepository)
         {
             _entradaRepository = entradaRepository;
-            _webHostEnv = webHostEnv;
         }
         public IActionResult Index(int? pagina)
         {
@@ -101,7 +99,9 @@ namespace GerenciamentoEntrada.Controllers
         public IActionResult Index(DateTime seachData, int? pagina) 
         {
             IEnumerable<Entrada> entrada = _entradaRepository.Pesquisar(seachData, pagina);
-            TempData["Lista"] = JsonConvert.SerializeObject(entrada);
+            IEnumerable<Entrada> saidaRelatorio = _entradaRepository.Relatorio(seachData);
+
+            TempData["Lista"] = JsonConvert.SerializeObject(saidaRelatorio);
 
             if (Request.IsHttps)
             {
@@ -117,7 +117,8 @@ namespace GerenciamentoEntrada.Controllers
         }
         public IActionResult ExportPdf()
         {
-            var entradaList = JsonConvert.DeserializeObject<IEnumerable<Entrada>>(TempData["Lista"].ToString());
+            var data = DateTime.Parse($"1/{DateTime.Now.Month}/{DateTime.Now.Year}");
+            var entradaList = (TempData["Lista"] == null) ? _entradaRepository.Relatorio(data).ToList() : JsonConvert.DeserializeObject<IEnumerable<Entrada>>(TempData["Lista"].ToString());
 
             var pdf = new ViewAsPdf
             {

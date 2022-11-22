@@ -87,6 +87,22 @@ namespace GerenciamentoEntrada.Repository
             return query;
              
         }
+
+        public IEnumerable<Entrada> Relatorio(DateTime data)
+        {
+            DateTime mesInicio = DateTime.Parse($"1/{data.Month}/{data.Year}");
+            DateTime mesFim = DateTime.Parse($"{DateTime.DaysInMonth(data.Year, data.Month)}/{data.Month}/{data.Year}");
+
+            var query = _context.Entradas.Include(p => p.mercadoria)
+              .Where(p => p.DataHora >= mesInicio && p.DataHora <= mesFim).ToList();
+
+            if (!data.Equals("01/01/0001 00:00:00"))
+            {
+                return query;
+            }
+
+            return _context.Entradas.Include(p => p.mercadoria).ToList();
+        }
     }
 }
 

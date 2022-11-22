@@ -11,12 +11,10 @@ namespace GerenciamentoMercadoria.Controllers
     public class SaidaController : Controller
     {
         private readonly ISaidaRepository _saidaRepository;
-        public readonly IWebHostEnvironment _webHostEnv;
 
-        public SaidaController(IWebHostEnvironment webHostEnv, ISaidaRepository saidaRepository)
+        public SaidaController(ISaidaRepository saidaRepository)
         {
             _saidaRepository = saidaRepository;
-            _webHostEnv = webHostEnv;
         }
         public IActionResult Index(int? pagina)
         {
@@ -111,8 +109,7 @@ namespace GerenciamentoMercadoria.Controllers
             return View(saida);
         }
 
-        [HttpGet]
-        public IActionResult Relatorio(DateTime seachData)
+        public IActionResult Relatorio()
         {
             return View();
         }
