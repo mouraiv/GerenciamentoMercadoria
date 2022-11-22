@@ -15,6 +15,8 @@ Se faz necessário realizar a instalação das aplicações/frameworks abaixo:
     - [MS EntityFrameworkCoreDesign 6.x]
     - [MS EntityFrameworkCoreProxies 6.x]
     - [MS EntityFrameworkCoreSqlServer 6.x]
+    - [Rotativa.AspNetCore 1.x]
+    - [X.PagedList.Mvc.Core 8.x]
 
     
  # Features
