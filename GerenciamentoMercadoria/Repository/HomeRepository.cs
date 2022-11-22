@@ -22,8 +22,9 @@ namespace GerenciamentoMercadoria.Repository
             int paginaNumero = (pagina ?? 1);
 
             return _context.EntradaSaidas.AsNoTracking()
-                        .Include(p => p.mercadoria).OrderBy(p => p.DataHora)
-                            .ToList().ToPagedList(paginaNumero, paginaTamanho);
+                        .Include(p => p.mercadoria)
+                            .OrderByDescending(p => p.DataHora)
+                                .ToList().ToPagedList(paginaNumero, paginaTamanho);
         }
 
         public IEnumerable<EntradaSaida> Listar()

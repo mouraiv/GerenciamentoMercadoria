@@ -20,7 +20,7 @@
     <h4>Cadastrar Entradas</h4>
 
     <form asp-controller="Entrada" asp-action="Inserir" method="post">
-        <strong class="text-success">@DateTime.Now</strong>
+        <div class="text-success" id="relogio"></div>
         <div class="form-group mb-2 mt-3">
             <label>Produto</label>
             <select asp-for="MercadoriaId" name="MercadoriaId" asp-items="ViewBag.MercadoriaId" class="form-select">
@@ -30,7 +30,7 @@
         </div>
         <div class="form-group mb-2">
             <label>Quantidade</label>
-            <input type="Quantidade" asp-for="Quantidade" name="Quantidade" class="form-control">
+            <input type="number" min="0" asp-for="Quantidade" name="Quantidade" class="form-control">
             <small class="text-danger">@Html.ValidationMessageFor(p => p.Quantidade)</small>
         </div>
         <div class="form-group mb-2">
@@ -40,7 +40,7 @@
         </div>
         <div class="form-group mb-2">
             <label>Numero</label>
-            <input type="number" asp-for="Numero" name="Numero" class="form-control">
+            <input type="number" min="0" asp-for="Numero" name="Numero" class="form-control">
             <small class="text-danger">@Html.ValidationMessageFor(p => p.Numero)</small>
         </div>
         <div class="form-group mb-2">

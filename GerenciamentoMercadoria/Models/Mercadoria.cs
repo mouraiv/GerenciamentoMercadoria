@@ -8,10 +8,10 @@ namespace GerenciamentoMercadoria.Models
         public int Id { get; set; }
         [Required(ErrorMessage = "Campo obrigatório.")]
         [StringLength(50, ErrorMessage = "Limite de 50 caracteres excedido.")]
-        public string Nome { get; set; }
+        public string? Nome { get; set; }
         [Required(ErrorMessage = "Campo obrigatório.")]
         [StringLength(150, ErrorMessage = "Limite de 150 caracteres excedido.")]
-        public string Descricao { get; set; }
+        public string? Descricao { get; set; }
         [Required(ErrorMessage = "Campo obrigatório.")]
         public int FabricanteId { get; set; }
         public Fabricante? Fabricante { get; set; }

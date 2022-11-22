@@ -1,5 +1,4 @@
-﻿using FastReport.Export.PdfSimple;
-using GerenciamentoMercadoria.Models;
+﻿using GerenciamentoMercadoria.Models;
 using GerenciamentoMercadoria.Repository.Interface;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -90,7 +89,7 @@ namespace GerenciamentoMercadoria.Controllers
             }
             catch (Exception error)
             {
-                TempData["Falha"] = $"Erro ao Atualizar - O Campo nome precisa conter um valor.";
+                TempData["Falha"] = $"Erro ao Atualizar - O Campo nome precisa conter um valor. {error.Message}";
                 return View(saida);
             }
         }

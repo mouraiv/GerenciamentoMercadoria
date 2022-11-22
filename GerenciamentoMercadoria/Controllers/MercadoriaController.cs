@@ -118,7 +118,7 @@ namespace GerenciamentoMercadoria.Controllers
             }
             catch (Exception error)
             {
-                TempData["Falha"] = $"Erro ao Atualizar - O Campo nome precisa conter um valor.";
+                TempData["Falha"] = $"Erro ao Atualizar - O Campo nome precisa conter um valor. {error.Message}";
                 return View(mercadoria);
             }
         }

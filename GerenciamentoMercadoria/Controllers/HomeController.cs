@@ -21,7 +21,7 @@ namespace GerenciamentoMercadoria.Controllers
             return View(entradaSaida); 
         }
         [HttpGet("EntradaSaida")]
-        public IActionResult Index()
+        public IActionResult EntradaSaidaJson()
         {
             List<EntradaSaida> entradaSaida = _homeRepository.Listar().ToList();
 
