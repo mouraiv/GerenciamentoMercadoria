@@ -22,8 +22,8 @@ Se faz necessário realizar a instalação das aplicações/frameworks abaixo:
 - [x] CRUD categoria
 - [x] CRUD fabricante
 - [x] CRUD mercadoria
-- [ ] Gerenciamento de entrada e saída de mercadorias
-- [ ] Tela para visualização das entradas e saídas por mês de cada mercadoria em formato de
+- [x] Gerenciamento de entrada e saída de mercadorias
+- [x] Tela para visualização das entradas e saídas por mês de cada mercadoria em formato de
 gráfico;
-- [ ] Exportar relatório mensal com todas as entradas e saídas de todas as mercadorias no
+- [x] Exportar relatório mensal com todas as entradas e saídas de todas as mercadorias no
 formato PDF;
